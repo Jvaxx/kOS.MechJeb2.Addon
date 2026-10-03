@@ -55,8 +55,11 @@ UNTIL NOT running {
     PRINT "  4) Ascent wrapper tests".
     PRINT "  5) Maneuver Planner wrapper tests".
     PRINT "  6) Basic maneuver tests".
-    PRINT "  7) Node Executor wrapper tests".
-    PRINT "  8) Run ALL tests".
+    PRINT "  7) Orbital geometry tests".
+    PRINT "  8) Rendezvous tests".
+    PRINT "  9) Transfer tests".
+    PRINT "  A) Node Executor wrapper tests".
+    PRINT "  B) Run ALL tests".
     PRINT "  0) Exit".
     PRINT "".
 
@@ -105,11 +108,29 @@ UNTIL NOT running {
 
     } ELSE IF choice = "7" {
         PRINT "".
+        PRINT "Running Orbital geometry tests...".
+        RUN ManeuverPlannerOrbitalTest.
+        WAIT_FOR_KEY().
+
+    } ELSE IF choice = "8" {
+        PRINT "".
+        PRINT "Running Rendezvous tests...".
+        RUN ManeuverPlannerRendezvousTest.
+        WAIT_FOR_KEY().
+
+    } ELSE IF choice = "9" {
+        PRINT "".
+        PRINT "Running Transfer tests...".
+        RUN ManeuverPlannerTransferTest.
+        WAIT_FOR_KEY().
+
+    } ELSE IF choice = "A" OR choice = "a" {
+        PRINT "".
         PRINT "Running NodeExecutor wrapper tests...".
         RUN NodeExecutorWrapperTest.
         WAIT_FOR_KEY().
 
-    } ELSE IF choice = "8" {
+    } ELSE IF choice = "B" OR choice = "b" {
         PRINT "".
         PRINT "Running ALL test suites...".
 
@@ -137,13 +158,25 @@ UNTIL NOT running {
         RUN ManeuverPlannerBasicTest.
         WAIT_FOR_KEY().
 
+        PRINT "---------------- ORBITAL -------------".
+        RUN ManeuverPlannerOrbitalTest.
+        WAIT_FOR_KEY().
+
+        PRINT "---------------- RENDEZVOUS ----------".
+        RUN ManeuverPlannerRendezvousTest.
+        WAIT_FOR_KEY().
+
+        PRINT "---------------- TRANSFER ------------".
+        RUN ManeuverPlannerTransferTest.
+        WAIT_FOR_KEY().
+
         PRINT "---------------- NODE ----------------".
         RUN NodeExecutorWrapperTest.
         WAIT_FOR_KEY().
 
     } ELSE {
         PRINT "".
-        PRINT "Unknown choice: " + choice + " (expected 0-8).".
+        PRINT "Unknown choice: " + choice + " (expected 0-9, A, B).".
         WAIT_FOR_KEY().
     }.
 }.

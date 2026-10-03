@@ -642,6 +642,40 @@ set planner to mj:planner.
 
 ---
 
+#### Orbital geometry operations
+
+| Suffix        | Parameters             | Description                       |
+|---------------|------------------------|-----------------------------------|
+| `ECCENTRICITY`| ecc (0-1), timeRef     | Change eccentricity               |
+| `LONGITUDE`   | degrees, timeRef       | Change longitude of periapsis     |
+| `LAN`         | degrees, timeRef       | Change longitude of ascending node|
+
+---
+
+#### Rendezvous operations
+
+| Suffix              | Parameters             | Description                      |
+|---------------------|------------------------|----------------------------------|
+| `PLANE`             | timeRef                | Match orbital plane with target  |
+| `KILLRELVEL`        | timeRef                | Match velocity with target       |
+| `CHANGEINCLINATION` | degrees, timeRef       | Change orbital inclination       |
+| `LAMBERT`           | interval (s), timeRef  | Lambert intercept trajectory     |
+
+---
+
+#### Transfer operations
+
+| Suffix             | Parameters              | Description                                      |
+|--------------------|-------------------------|--------------------------------------------------|
+| `HOHMANN`          | timeRef, capture (bool) | Hohmann transfer to target                       |
+| `HOHMANNRENDEZVOUS`| (bool, R/W)             | Enable rendezvous targeting (default: TRUE)      |
+| `INTERPLANETARY`   | waitForPhase (bool)     | Interplanetary transfer                          |
+| `COURSECORRECTION` | peA (m)                 | Fine-tune trajectory (auto-timing)               |
+| `RESONANTORBIT`    | num, denom, timeRef     | Create resonant orbit                            |
+| `MOONRETURN`       | peA (m)                 | Return from moon orbit (auto-timing)             |
+
+---
+
 #### TimeRef values
 
 | Value             | Description                              |
@@ -662,7 +696,7 @@ set planner to mj:planner.
 
 ---
 
-#### Example: Raise and circularize orbit
+#### Example: Raise orbit and transfer to Mun
 
 ```ks
 set mj      to addons:mj.
@@ -673,6 +707,10 @@ planner:changeap(200000, "PERIAPSIS").
 
 // After executing first node, circularize at apoapsis
 planner:circularize("APOAPSIS").
+
+// Hohmann transfer to Mun
+set target to mun.
+planner:hohmann("COMPUTED", false).  // false = no capture burn
 ```
 
 ---

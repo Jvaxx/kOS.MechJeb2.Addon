@@ -67,6 +67,9 @@
         <Compile Include="Wrapeers\MechJebInfoItemsWrapper.cs"/>
         <Compile Include="Wrapeers\MechJebManeuverPlannerWrapper.cs"/>
         <Compile Include="Wrapeers\ManeuverPlanner\Basic.cs"/>
+        <Compile Include="Wrapeers\ManeuverPlanner\Orbital.cs"/>
+        <Compile Include="Wrapeers\ManeuverPlanner\Transfer.cs"/>
+        <Compile Include="Wrapeers\ManeuverPlanner\Rendezvous.cs"/>
         <Compile Include="Wrapeers\MechJebNodeExecutorWrapper.cs"/>
         <Compile Include="Wrapeers\VesselStateWrapper.cs"/>
     </ItemGroup>
