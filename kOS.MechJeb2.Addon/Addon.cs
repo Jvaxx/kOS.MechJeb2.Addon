@@ -50,6 +50,13 @@ namespace kOS.MechJeb2.Addon
             AddSuffix(new[] { "TARGET", "TARGETCONTROLLER" }, new NoArgsSuffix<MechJebTargetWrapper>(() =>
                 MechJebController.Instance.Target
             ));
+            AddSuffix("STAGEDELTAV",
+                new OneArgsSuffix<FuelStatsPairValue, ScalarValue>(
+                    idx => new FuelStatsPairValue(MechJebController.Instance.StageStats, (int)idx),
+                    "Returns vacuum/atmosphere FuelStats for the given fuel-flow stage index"));
+            AddSuffix(new[] { "STAGESTATS", "SS" }, new NoArgsSuffix<MechJebStageStatsWrapper>(() =>
+                MechJebController.Instance.StageStats
+            ));
             AddSuffix("VERSION",
                 new NoArgsSuffix<VersionInfo>(GetVersionInfo,
                     "Returns the kOS.MechJeb2.Addon version (major.minor.patch.build)."));
